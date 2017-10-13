@@ -367,12 +367,12 @@ Func WorkerThread()
 
 		If $energyEventEnergyLimitBot<=$energyEventEnergyLimitCurrent Then
 			If $energyEventNextActionBot=="Continue using Energy Timer" Then
-			$useEnergyTimer=$GUI_CHECKED
-			$milisToWait=$milisPerEnergy * $energyPerLevel
+				$useEnergyTimer=$GUI_CHECKED
+				$milisToWait=$milisPerEnergy * $energyPerLevel
 			EndIf
 
-			If $energyEventEnergyLimitBot=="" Then
-
+			If $energyEventEnergyLimitBot=="Stop will use Toggle to stop" Then
+				$ToggleBot=0;
 			EndIf
 
 		EndIf
