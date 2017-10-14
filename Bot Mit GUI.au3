@@ -101,7 +101,7 @@ $EnergyEventNextActionList="Continue using Energy Timer|Stop will use Toggle to 
 $arrayEnergyEventNextActionList=StringSplit($EnergyEventNextActionList,"|")
 $energyEventNextActionIndex=_ArraySearch($arrayEnergyEventNextActionList,$energyEventNextAction)
 
-GUICtrlSetData($energyEventNextActionIndex,"|" & $EnergyEventNextActionList,$arrayEnergyEventNextActionList[$energyEventNextActionIndex])
+GUICtrlSetData($EnergyEventNextActionCombo,"|" & $EnergyEventNextActionList,$arrayEnergyEventNextActionList[$energyEventNextActionIndex])
 GUICtrlSetState($EnergyEventCheckbox,$energyEventUse)
 GUICtrlSetData($EnergyUsageInput,$energyEventEnergyLimit)
 
@@ -308,7 +308,6 @@ Func WorkerThread()
 
 			Case "ToggleMsg"
 				$ToggleBot = Toggle($ToggleBot)
-				$energyEventEnergyLimitCurrent=0;
 
 		EndSwitch
 
