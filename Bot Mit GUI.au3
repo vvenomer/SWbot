@@ -117,7 +117,8 @@ GUICtrlSetData($energyEventEnergyUsageInput,$energyEventEnergyLimit)
 Local $TimeConverterCestDate=0, $TimeConverterCestTime=0
 _DateTimeSplit(_NowCalc(),$TimeConverterCestDate, $TimeConverterCestTime)
 GUICtrlSetData($TimeConvertCestInput,StringFormat("%02d", $TimeConverterCestDate[3])&":"&StringFormat("%02d", $TimeConverterCestTime[1])&":"&StringFormat("%02d", $TimeConverterCestTime[2])&":"&StringFormat("%02d", $TimeConverterCestTime[3]))
-
+_DateTimeSplit(CESTtoPDT(_NowCalc()),$TimeConverterCestDate, $TimeConverterCestTime)
+GUICtrlSetData($TimeConvertPdtInput,StringFormat("%02d", $TimeConverterCestDate[3])&":"&StringFormat("%02d", $TimeConverterCestTime[1])&":"&StringFormat("%02d", $TimeConverterCestTime[2])&":"&StringFormat("%02d", $TimeConverterCestTime[3]))
 
 ;Tell Thread to read CFG
 _AuThread_SendMessage($workerThread, "UpdateMsg")
@@ -182,14 +183,14 @@ While True
 			GUICtrlSetData($TimeConvertPdtInput,StringFormat("%02d", $TimeConvertCestDate[3])&":"&StringFormat("%02d", $TimeConvertCestTime[1])&":"&StringFormat("%02d", $TimeConvertCestTime[2])&":"&StringFormat("%02d", $TimeConvertCestTime[3]))
 
 		Case $TimeConvertPdtInput
-			Local $TimeConvertCestDate=0, $TimeConvertCestTime=0, $TimeConvertCestInputString=GUICtrlRead($TimeConvertCestInput), $currentDateArray
+			Local $TimeConvertPdtDate=0, $TimeConvertPdtTime=0, $TimeConvertPdtInputString=GUICtrlRead($TimeConvertPdtInput), $currentDateArray
 
-			_DateTimeSplit(_NowCalc(),$currentDateArray,$TimeConvertCestTime)
-			$TimeConvertCestInputStringArray=StringSplit($TimeConvertCestInputString,":")
+			_DateTimeSplit(_NowCalc(),$currentDateArray,$TimeConvertPdtTime)
+			$TimeConvertPdtInputStringArray=StringSplit($TimeConvertPdtInputString,":")
 
-			$TimeConvertCestConvertDateString=$currentDateArray[1]&"-"&$currentDateArray[2]&"-"&$TimeConvertCestInputStringArray[1]&" "&$TimeConvertCestInputStringArray[2]&":"&$TimeConvertCestInputStringArray[3]&":"&$TimeConvertCestInputStringArray[4]
-			_DateTimeSplit(CESTtoPDT($TimeConvertCestConvertDateString),$TimeConvertCestDate, $TimeConvertCestTime)
-			GUICtrlSetData($TimeConvertPdtInput,StringFormat("%02d", $TimeConvertCestDate[3])&":"&StringFormat("%02d", $TimeConvertCestTime[1])&":"&StringFormat("%02d", $TimeConvertCestTime[2])&":"&StringFormat("%02d", $TimeConvertCestTime[3]))
+			$TimeConvertPdtConvertDateString=$currentDateArray[1]&"-"&$currentDateArray[2]&"-"&$TimeConvertPdtInputStringArray[1]&" "&$TimeConvertPdtInputStringArray[2]&":"&$TimeConvertPdtInputStringArray[3]&":"&$TimeConvertPdtInputStringArray[4]
+			_DateTimeSplit(PDTtoCEST($TimeConvertPdtConvertDateString),$TimeConvertPdtDate, $TimeConvertPdtTime)
+			GUICtrlSetData($TimeConvertCestInput,StringFormat("%02d", $TimeConvertPdtDate[3])&":"&StringFormat("%02d", $TimeConvertPdtTime[1])&":"&StringFormat("%02d", $TimeConvertPdtTime[2])&":"&StringFormat("%02d", $TimeConvertPdtTime[3]))
 
 
 	EndSwitch
