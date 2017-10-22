@@ -524,5 +524,80 @@
 			</properties>
 			<components/>
 		</object>
+		<object type="TAInput" name="TimeConvertCestInput">
+			<properties>
+				<property name="Left" vt="Int16">496</property>
+				<property name="Top" vt="Int16">352</property>
+				<property name="Width" vt="Int8">121</property>
+				<property name="Height" vt="Int8">21</property>
+				<property name="TabOrder" vt="Int8">32</property>
+				<property name="Text" vt="String">TimeConvertCestInput</property>
+				<property name="OnChange" vt="String">TimeConvertCestInputChange</property>
+				<property name="CtrlStyle" vt="Int32">1342374016</property>
+				<property name="CtrlExStyle" vt="Int16">512</property>
+				<property name="Resizing" vt="Set">DockHeight</property>
+			</properties>
+			<components/>
+		</object>
+		<object type="TALabel" name="">
+			<properties>
+				<property name="Left" vt="Int16">496</property>
+				<property name="Top" vt="Int16">240</property>
+				<property name="Width" vt="Int16">152</property>
+				<property name="Height" vt="Int8">17</property>
+				<property name="Caption" vt="String">Time Converter DD:HH:MM:SS</property>
+				<property name="TabOrder" vt="Int8">33</property>
+				<property name="HaveVariable" vt="False">False</property>
+				<property name="CtrlStyle" vt="Int32">1342308608</property>
+				<property name="CtrlExStyle" vt="Int8">0</property>
+				<property name="Resizing" vt="Set"/>
+			</properties>
+			<components/>
+		</object>
+		<object type="TALabel" name="Label9">
+			<properties>
+				<property name="Left" vt="Int16">496</property>
+				<property name="Top" vt="Int16">328</property>
+				<property name="Width" vt="Int8">25</property>
+				<property name="Height" vt="Int8">17</property>
+				<property name="Caption" vt="String">Cest</property>
+				<property name="TabOrder" vt="Int8">34</property>
+				<property name="HaveVariable" vt="False">False</property>
+				<property name="CtrlStyle" vt="Int32">1342308608</property>
+				<property name="CtrlExStyle" vt="Int8">0</property>
+				<property name="Resizing" vt="Set"/>
+			</properties>
+			<components/>
+		</object>
+		<object type="TALabel" name="Label10">
+			<properties>
+				<property name="Left" vt="Int16">496</property>
+				<property name="Top" vt="Int16">272</property>
+				<property name="Width" vt="Int8">20</property>
+				<property name="Height" vt="Int8">17</property>
+				<property name="Caption" vt="String">Pdt</property>
+				<property name="TabOrder" vt="Int8">35</property>
+				<property name="HaveVariable" vt="False">False</property>
+				<property name="CtrlStyle" vt="Int32">1342308608</property>
+				<property name="CtrlExStyle" vt="Int8">0</property>
+				<property name="Resizing" vt="Set"/>
+			</properties>
+			<components/>
+		</object>
+		<object type="TAInput" name="TimeConvertPdtInput">
+			<properties>
+				<property name="Left" vt="Int16">496</property>
+				<property name="Top" vt="Int16">296</property>
+				<property name="Width" vt="Int8">121</property>
+				<property name="Height" vt="Int8">21</property>
+				<property name="TabOrder" vt="Int8">36</property>
+				<property name="Text" vt="String">TimeConvertPdtInput</property>
+				<property name="OnChange" vt="String">TimeConvertPdtInputChange</property>
+				<property name="CtrlStyle" vt="Int32">1342374016</property>
+				<property name="CtrlExStyle" vt="Int16">512</property>
+				<property name="Resizing" vt="Set">DockHeight</property>
+			</properties>
+			<components/>
+		</object>
 	</components>
 </object>

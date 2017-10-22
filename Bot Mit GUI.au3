@@ -48,6 +48,11 @@ $Label8 = GUICtrlCreateLabel("What to do later?", 160, 344, 86, 17)
 $EnergyEventNextActionCombo = GUICtrlCreateCombo("EnergyEventNextActionCombo", 160, 368, 169, 25, BitOR($CBS_DROPDOWN,$CBS_AUTOHSCROLL))
 GUICtrlSetData(-1, "Continue using Energy Timer|Stop will use Toggle to stop")
 $energyEventResetUsedEnergy = GUICtrlCreateButton("Reset Used Energy", 496, 72, 155, 25)
+$TimeConvertCestInput = GUICtrlCreateInput("TimeConvertCestInput", 496, 352, 121, 21)
+GUICtrlCreateLabel("Time Converter DD:HH:MM:SS", 496, 240, 152, 17)
+$Label9 = GUICtrlCreateLabel("Cest", 496, 328, 25, 17)
+$Label10 = GUICtrlCreateLabel("Pdt", 496, 272, 20, 17)
+$TimeConvertPdtInput = GUICtrlCreateInput("TimeConvertPdtInput", 496, 296, 121, 21)
 GUISetState(@SW_SHOW)
 #EndRegion ### END Koda GUI section ###
 
@@ -107,10 +112,15 @@ GUICtrlSetState($EnergyEventCheckbox,$energyEventUse)
 GUICtrlSetData($energyEventEnergyUsageInput,$energyEventEnergyLimit)
 
 
+;Ustaw Time Converter na Current Time;
+
+Local $TimeConverterCestDate=0, $TimeConverterCestTime=0
+_DateTimeSplit(_NowCalc(),$TimeConverterCestDate, $TimeConverterCestTime)
+GUICtrlSetData($TimeConvertCestInput,StringFormat("%02d", $TimeConverterCestDate[3])&":"&StringFormat("%02d", $TimeConverterCestTime[1])&":"&StringFormat("%02d", $TimeConverterCestTime[2])&":"&StringFormat("%02d", $TimeConverterCestTime[3]))
+
 
 ;Tell Thread to read CFG
 _AuThread_SendMessage($workerThread, "UpdateMsg")
-
 
 
 While True
@@ -161,6 +171,27 @@ While True
 		Case $energyEventResetUsedEnergy
 			_AuThread_SendMessage($workerThread,"EnergyEventReset")
 
+		Case $TimeConvertCestInput
+			Local $TimeConvertCestDate=0, $TimeConvertCestTime=0, $TimeConvertCestInputString=GUICtrlRead($TimeConvertCestInput), $currentDateArray
+
+			_DateTimeSplit(_NowCalc(),$currentDateArray,$TimeConvertCestTime)
+			$TimeConvertCestInputStringArray=StringSplit($TimeConvertCestInputString,":")
+
+			$TimeConvertCestConvertDateString=$currentDateArray[1]&"-"&$currentDateArray[2]&"-"&$TimeConvertCestInputStringArray[1]&" "&$TimeConvertCestInputStringArray[2]&":"&$TimeConvertCestInputStringArray[3]&":"&$TimeConvertCestInputStringArray[4]
+			_DateTimeSplit(CESTtoPDT($TimeConvertCestConvertDateString),$TimeConvertCestDate, $TimeConvertCestTime)
+			GUICtrlSetData($TimeConvertPdtInput,StringFormat("%02d", $TimeConvertCestDate[3])&":"&StringFormat("%02d", $TimeConvertCestTime[1])&":"&StringFormat("%02d", $TimeConvertCestTime[2])&":"&StringFormat("%02d", $TimeConvertCestTime[3]))
+
+		Case $TimeConvertPdtInput
+			Local $TimeConvertCestDate=0, $TimeConvertCestTime=0, $TimeConvertCestInputString=GUICtrlRead($TimeConvertCestInput), $currentDateArray
+
+			_DateTimeSplit(_NowCalc(),$currentDateArray,$TimeConvertCestTime)
+			$TimeConvertCestInputStringArray=StringSplit($TimeConvertCestInputString,":")
+
+			$TimeConvertCestConvertDateString=$currentDateArray[1]&"-"&$currentDateArray[2]&"-"&$TimeConvertCestInputStringArray[1]&" "&$TimeConvertCestInputStringArray[2]&":"&$TimeConvertCestInputStringArray[3]&":"&$TimeConvertCestInputStringArray[4]
+			_DateTimeSplit(CESTtoPDT($TimeConvertCestConvertDateString),$TimeConvertCestDate, $TimeConvertCestTime)
+			GUICtrlSetData($TimeConvertPdtInput,StringFormat("%02d", $TimeConvertCestDate[3])&":"&StringFormat("%02d", $TimeConvertCestTime[1])&":"&StringFormat("%02d", $TimeConvertCestTime[2])&":"&StringFormat("%02d", $TimeConvertCestTime[3]))
+
+
 	EndSwitch
 	;Get Status String
 	$statusString = _AuThread_GetMessage() ;
@@ -192,6 +223,11 @@ WEnd
 Func CESTtoPDT($time)
 	Return _DateAdd('h', -9, $time)
 EndFunc   ;==>CESTtoPDT
+
+Func PDTtoCEST($time)
+	Return _DateAdd('h',9,$time)
+EndFunc
+
 
 
 #Region TU JEST WĄTKEK WORKER BOTA
