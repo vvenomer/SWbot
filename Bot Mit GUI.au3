@@ -21,12 +21,12 @@ $Label3 = GUICtrlCreateLabel("Seconds", 8, 120, 46, 17)
 $InputSecs = GUICtrlCreateInput("InputSecs", 8, 144, 145, 21)
 $DebugInfo = GUICtrlCreateLabel("DebugInfo", 320, 8, 166, 345)
 $ToggleBotButton = GUICtrlCreateButton("Toggle", 496, 8, 75, 25)
-$ConnectButton = GUICtrlCreateButton("Connect To Adb", 496, 96, 99, 25)
+$ConnectButton = GUICtrlCreateButton("Connect To Adb", 496, 128, 99, 25)
 $ResetTimerButton = GUICtrlCreateButton("Reset Timer", 576, 8, 75, 25)
 $ForceEventButton = GUICtrlCreateButton("Force Event", 496, 40, 75, 25)
-$ResetAdbServerButton = GUICtrlCreateButton("Reset ADB server", 496, 128, 99, 25)
+$ResetAdbServerButton = GUICtrlCreateButton("Reset ADB server", 496, 160, 99, 25)
 $GimmeShellButton = GUICtrlCreateButton("Gimme Shell", 576, 40, 75, 25)
-$IPAddress1 = _GUICtrlIpAddress_Create($Form1, 496, 72, 130, 21)
+$IPAddress1 = _GUICtrlIpAddress_Create($Form1, 496, 104, 130, 21)
 _GUICtrlIpAddress_Set($IPAddress1, "0.0.0.0")
 $UpdateCfgButton = GUICtrlCreateButton("Update Config", 8, 408, 75, 25)
 $SellRuneCheck = GUICtrlCreateCheckbox("Sell Rune", 8, 360, 97, 17)
@@ -38,15 +38,16 @@ $InputEnergyMins = GUICtrlCreateInput("InputEnergyMins", 8, 280, 145, 21)
 $EnergyTimerCheck = GUICtrlCreateCheckbox("Use Energy Timer?", 8, 384, 113, 17)
 $Label7 = GUICtrlCreateLabel("Energy Per Level", 8, 312, 85, 17)
 $InputEnergyPerLevel = GUICtrlCreateInput("InputEnergyPerLevel", 8, 336, 145, 21)
-$AdbVersionCombo = GUICtrlCreateCombo("Select Adb Version", 496, 160, 145, 25, BitOR($CBS_DROPDOWN,$CBS_AUTOHSCROLL))
+$AdbVersionCombo = GUICtrlCreateCombo("Select Adb Version", 496, 192, 145, 25, BitOR($CBS_DROPDOWN,$CBS_AUTOHSCROLL))
 GUICtrlSetData(-1, "39|31")
-$TimeZoneInfo = GUICtrlCreateLabel("TimeZoneInfo", 160, 16, 150, 217)
+$TimeZoneInfo = GUICtrlCreateLabel("TimeZoneInfo", 160, 8, 150, 225)
 $EnergyEventCheckbox = GUICtrlCreateCheckbox("Use Energy Event", 160, 264, 113, 17)
 $EnergyUsageLabel = GUICtrlCreateLabel("Energy To Use", 160, 288, 75, 17)
-$EnergyUsageInput = GUICtrlCreateInput("energyInput", 160, 312, 121, 21)
+$energyEventEnergyUsageInput = GUICtrlCreateInput("energyInput", 160, 312, 121, 21)
 $Label8 = GUICtrlCreateLabel("What to do later?", 160, 344, 86, 17)
-$EnergyEventNextActionCombo = GUICtrlCreateCombo("", 160, 368, 169, 25, BitOR($CBS_DROPDOWN,$CBS_AUTOHSCROLL))
+$EnergyEventNextActionCombo = GUICtrlCreateCombo("EnergyEventNextActionCombo", 160, 368, 169, 25, BitOR($CBS_DROPDOWN,$CBS_AUTOHSCROLL))
 GUICtrlSetData(-1, "Continue using Energy Timer|Stop will use Toggle to stop")
+$energyEventResetUsedEnergy = GUICtrlCreateButton("Reset Used Energy", 496, 72, 155, 25)
 GUISetState(@SW_SHOW)
 #EndRegion ### END Koda GUI section ###
 
@@ -103,7 +104,7 @@ $energyEventNextActionIndex=_ArraySearch($arrayEnergyEventNextActionList,$energy
 
 GUICtrlSetData($EnergyEventNextActionCombo,"|" & $EnergyEventNextActionList,$arrayEnergyEventNextActionList[$energyEventNextActionIndex])
 GUICtrlSetState($EnergyEventCheckbox,$energyEventUse)
-GUICtrlSetData($EnergyUsageInput,$energyEventEnergyLimit)
+GUICtrlSetData($energyEventEnergyUsageInput,$energyEventEnergyLimit)
 
 
 
@@ -151,11 +152,14 @@ While True
 			IniWrite(@WorkingDir & "\cfg.cfg", "ADB", "version", $adbVersion)
 
 			IniWrite(@WorkingDir & "\cfg.cfg", "EnergyEvent", "useEvent", GUICtrlRead($EnergyEventCheckbox))
-			IniWrite(@WorkingDir & "\cfg.cfg", "EnergyEvent", "limit", GUICtrlRead($EnergyUsageInput))
+			IniWrite(@WorkingDir & "\cfg.cfg", "EnergyEvent", "limit", GUICtrlRead($energyEventEnergyUsageInput))
 			IniWrite(@WorkingDir & "\cfg.cfg", "EnergyEvent", "next", GUICtrlRead($EnergyEventNextActionCombo))
 
 
 			_AuThread_SendMessage($workerThread, "UpdateMsg")
+
+		Case $energyEventResetUsedEnergy
+			_AuThread_SendMessage($workerThread,"EnergyEventReset")
 
 	EndSwitch
 	;Get Status String
@@ -182,7 +186,7 @@ While True
 	GUICtrlSetData($TimeZoneInfo, $TimeZoneString)
 
 
-	Sleep(50)
+	Sleep(60)
 WEnd
 
 Func CESTtoPDT($time)
@@ -191,7 +195,6 @@ EndFunc   ;==>CESTtoPDT
 
 
 #Region TU JEST WĄTKEK WORKER BOTA
-
 Func WorkerThread()
 	Local $adbPath = "" ;
 	Local $ToggleBot = 0
@@ -309,6 +312,9 @@ Func WorkerThread()
 			Case "ToggleMsg"
 				$ToggleBot = Toggle($ToggleBot)
 
+			Case "EnergyEventReset"
+				$energyEventEnergyLimitCurrent=0;
+
 		EndSwitch
 
 		;sendStatus
@@ -370,7 +376,7 @@ Func WorkerThread()
 				$milisToWait=$milisPerEnergy * $energyPerLevel
 			EndIf
 
-			If $energyEventEnergyLimitBot=="Stop will use Toggle to stop" Then
+			If $energyEventNextActionBot=="Stop will use Toggle to stop" Then
 				$ToggleBot=0;
 			EndIf
 
@@ -379,7 +385,7 @@ Func WorkerThread()
 
 		;Bot Timer
 		$miliseconds = Int(TimerDiff($beginDate))
-		If $milisToWait < $miliseconds And $ToggleBot Then
+		If $milisToWait < $miliseconds And $ToggleBot==1 Then
 			;ShellExecuteWait($adbPath,"connect "&$ip,@WorkingDir,"",@SW_HIDE)
 			Sleep(20)
 
