@@ -12,7 +12,7 @@
 
 _AuThread_Startup()
 #Region ### START Koda GUI section ### Form=C:\Users\oem\SkyDrive\Programy\AutoItV3\summoners\GUI.kxf
-$Form1 = GUICreate("Summoners Tablet Farm", 668, 439, 192, 124)
+$Form1 = GUICreate("Summoners Tablet Farm", 674, 439, 186, 120)
 $InputHrs = GUICtrlCreateInput("InputHrs", 8, 32, 145, 21)
 $Label1 = GUICtrlCreateLabel("Hours", 8, 8, 32, 17)
 $Label2 = GUICtrlCreateLabel("Minutes", 8, 64, 41, 17)
@@ -20,13 +20,13 @@ $InputMins = GUICtrlCreateInput("InputMins", 8, 88, 145, 21)
 $Label3 = GUICtrlCreateLabel("Seconds", 8, 120, 46, 17)
 $InputSecs = GUICtrlCreateInput("InputSecs", 8, 144, 145, 21)
 $DebugInfo = GUICtrlCreateLabel("DebugInfo", 320, 8, 166, 345)
-$ToggleBotButton = GUICtrlCreateButton("Toggle", 496, 8, 75, 25)
-$ConnectButton = GUICtrlCreateButton("Connect To Adb", 496, 128, 99, 25)
-$ResetTimerButton = GUICtrlCreateButton("Reset Timer", 576, 8, 75, 25)
-$ForceEventButton = GUICtrlCreateButton("Force Event", 496, 40, 75, 25)
-$ResetAdbServerButton = GUICtrlCreateButton("Reset ADB server", 496, 160, 99, 25)
-$GimmeShellButton = GUICtrlCreateButton("Gimme Shell", 576, 40, 75, 25)
-$IPAddress1 = _GUICtrlIpAddress_Create($Form1, 496, 104, 130, 21)
+$ToggleBotButton = GUICtrlCreateButton("Toggle", 496, 8, 171, 33)
+$ConnectButton = GUICtrlCreateButton("Connect To Adb", 496, 176, 99, 25)
+$ResetTimerButton = GUICtrlCreateButton("Reset Timer", 544, 48, 83, 25)
+$ForceEventButton = GUICtrlCreateButton("Force Event", 496, 80, 83, 25)
+$ResetAdbServerButton = GUICtrlCreateButton("Reset ADB server", 496, 208, 99, 25)
+$GimmeShellButton = GUICtrlCreateButton("Gimme Shell", 584, 80, 83, 25)
+$IPAddress1 = _GUICtrlIpAddress_Create($Form1, 496, 152, 130, 21)
 _GUICtrlIpAddress_Set($IPAddress1, "0.0.0.0")
 $UpdateCfgButton = GUICtrlCreateButton("Update Config", 8, 408, 75, 25)
 $SellRuneCheck = GUICtrlCreateCheckbox("Sell Rune", 8, 360, 97, 17)
@@ -38,7 +38,7 @@ $InputEnergyMins = GUICtrlCreateInput("InputEnergyMins", 8, 280, 145, 21)
 $EnergyTimerCheck = GUICtrlCreateCheckbox("Use Energy Timer?", 8, 384, 113, 17)
 $Label7 = GUICtrlCreateLabel("Energy Per Level", 8, 312, 85, 17)
 $InputEnergyPerLevel = GUICtrlCreateInput("InputEnergyPerLevel", 8, 336, 145, 21)
-$AdbVersionCombo = GUICtrlCreateCombo("Select Adb Version", 496, 192, 145, 25, BitOR($CBS_DROPDOWN,$CBS_AUTOHSCROLL))
+$AdbVersionCombo = GUICtrlCreateCombo("Select Adb Version", 496, 240, 169, 25, BitOR($CBS_DROPDOWN,$CBS_AUTOHSCROLL))
 GUICtrlSetData(-1, "39|31")
 $TimeZoneInfo = GUICtrlCreateLabel("TimeZoneInfo", 160, 8, 150, 225)
 $EnergyEventCheckbox = GUICtrlCreateCheckbox("Use Energy Event", 160, 264, 113, 17)
@@ -47,12 +47,12 @@ $energyEventEnergyUsageInput = GUICtrlCreateInput("energyInput", 160, 312, 121, 
 $Label8 = GUICtrlCreateLabel("What to do later?", 160, 344, 86, 17)
 $EnergyEventNextActionCombo = GUICtrlCreateCombo("EnergyEventNextActionCombo", 160, 368, 169, 25, BitOR($CBS_DROPDOWN,$CBS_AUTOHSCROLL))
 GUICtrlSetData(-1, "Continue using Energy Timer|Stop will use Toggle to stop")
-$energyEventResetUsedEnergy = GUICtrlCreateButton("Reset Used Energy", 496, 72, 155, 25)
-$TimeConvertCestInput = GUICtrlCreateInput("TimeConvertCestInput", 496, 352, 121, 21)
-GUICtrlCreateLabel("Time Converter DD:HH:MM:SS", 496, 240, 152, 17)
-$Label9 = GUICtrlCreateLabel("Cest", 496, 328, 25, 17)
-$Label10 = GUICtrlCreateLabel("Pdt", 496, 272, 20, 17)
-$TimeConvertPdtInput = GUICtrlCreateInput("TimeConvertPdtInput", 496, 296, 121, 21)
+$energyEventResetUsedEnergy = GUICtrlCreateButton("Reset Used Energy", 496, 112, 171, 25)
+$TimeConvertCestInput = GUICtrlCreateInput("TimeConvertCestInput", 496, 400, 121, 21)
+GUICtrlCreateLabel("Time Converter DD:HH:MM:SS", 496, 288, 152, 17)
+$Label9 = GUICtrlCreateLabel("Cest", 496, 384, 25, 17)
+$Label10 = GUICtrlCreateLabel("Pdt", 496, 328, 20, 17)
+$TimeConvertPdtInput = GUICtrlCreateInput("TimeConvertPdtInput", 496, 344, 121, 21)
 GUISetState(@SW_SHOW)
 #EndRegion ### END Koda GUI section ###
 
@@ -192,7 +192,6 @@ While True
 			_DateTimeSplit(PDTtoCEST($TimeConvertPdtConvertDateString),$TimeConvertPdtDate, $TimeConvertPdtTime)
 			GUICtrlSetData($TimeConvertCestInput,StringFormat("%02d", $TimeConvertPdtDate[3])&":"&StringFormat("%02d", $TimeConvertPdtTime[1])&":"&StringFormat("%02d", $TimeConvertPdtTime[2])&":"&StringFormat("%02d", $TimeConvertPdtTime[3]))
 
-
 	EndSwitch
 	;Get Status String
 	$statusString = _AuThread_GetMessage() ;
@@ -266,6 +265,9 @@ Func WorkerThread()
 	Local $last_Event = "0:0:0" ;
 	Local $totalEvents = 0 ;
 
+	Local $tapCoordsX[10];
+	Local $tapCoordsY[10];
+
 	While True
 		$msg = _AuThread_GetMessage()
 		Switch $msg
@@ -333,9 +335,27 @@ Func WorkerThread()
 					$milisToWait = $hrs * 60 * 60 * 1000 + $mins * 60 * 1000 + $secs * 1000
 				EndIf
 
+				$tapCoordsX[0]=IniRead(@WorkingDir & "\cfg.cfg", "TapCoords", "reveivex", 0)
+				$tapCoordsX[1]=IniRead(@WorkingDir & "\cfg.cfg", "TapCoords", "skrzynka1x", 0)
+				$tapCoordsX[2]=IniRead(@WorkingDir & "\cfg.cfg", "TapCoords", "skrzynka2x", 0)
+				$tapCoordsX[3]=IniRead(@WorkingDir & "\cfg.cfg", "TapCoords", "getMaterialsx", 0)
+				$tapCoordsX[4]=IniRead(@WorkingDir & "\cfg.cfg", "TapCoords", "getEssencesx", 0)
+				$tapCoordsX[5]=IniRead(@WorkingDir & "\cfg.cfg", "TapCoords", "getRunex", 0)
+				$tapCoordsX[6]=IniRead(@WorkingDir & "\cfg.cfg", "TapCoords", "sellRune1x", 0)
+				$tapCoordsX[7]=IniRead(@WorkingDir & "\cfg.cfg", "TapCoords", "sellRune2x", 0)
+				$tapCoordsX[8]=IniRead(@WorkingDir & "\cfg.cfg", "TapCoords", "replayx", 0)
+				$tapCoordsX[9]=IniRead(@WorkingDir & "\cfg.cfg", "TapCoords", "startBattlex", 0)
 
-
-
+				$tapCoordsY[0]=IniRead(@WorkingDir & "\cfg.cfg", "TapCoords", "reveivey", 0)
+				$tapCoordsY[1]=IniRead(@WorkingDir & "\cfg.cfg", "TapCoords", "skrzynka1y", 0)
+				$tapCoordsY[2]=IniRead(@WorkingDir & "\cfg.cfg", "TapCoords", "skrzynka2y", 0)
+				$tapCoordsY[3]=IniRead(@WorkingDir & "\cfg.cfg", "TapCoords", "getMaterialsy", 0)
+				$tapCoordsY[4]=IniRead(@WorkingDir & "\cfg.cfg", "TapCoords", "getEssencesy", 0)
+				$tapCoordsY[5]=IniRead(@WorkingDir & "\cfg.cfg", "TapCoords", "getRuney", 0)
+				$tapCoordsY[6]=IniRead(@WorkingDir & "\cfg.cfg", "TapCoords", "sellRune1y", 0)
+				$tapCoordsY[7]=IniRead(@WorkingDir & "\cfg.cfg", "TapCoords", "sellRune2y", 0)
+				$tapCoordsY[8]=IniRead(@WorkingDir & "\cfg.cfg", "TapCoords", "replayy", 0)
+				$tapCoordsY[9]=IniRead(@WorkingDir & "\cfg.cfg", "TapCoords", "startBattley", 0)
 			Case "KillMeMsg"
 				IniWrite(@WorkingDir & "\cfg.cfg", "ADB", "ip", $ip)
 				IniWrite(@WorkingDir & "\cfg.cfg", "Timer", "hrs", $hrs)
@@ -372,7 +392,6 @@ Func WorkerThread()
 		Else
 			$energyEventCheckedText = "YES"
 		EndIf
-
 
 		If $useEnergyTimer == $GUI_UNCHECKED Then
 			$UseEnergyStatusString = "NO"
@@ -426,39 +445,39 @@ Func WorkerThread()
 			;ShellExecuteWait($adbPath,"connect "&$ip,@WorkingDir,"",@SW_HIDE)
 			Sleep(20)
 
-			ShellExecuteWait($adbPath, "shell input tap 1000 600", @WorkingDir, "", @SW_HIDE) ;Nie w reveive
+			ShellExecuteWait($adbPath, "shell input tap " & $tapCoordsX[0] & " " & $tapCoordsY[0], @WorkingDir, "", @SW_HIDE) ;Nie w reveive
 			_AuThread_SendMessage(_AuThread_MainThread(), "Nie w Reveive")
 			Sleep(Random(3000, 6000, 1))
-			ShellExecuteWait($adbPath, "shell input tap 200 200", @WorkingDir, "", @SW_HIDE) ;pokaz Skrzynke
+			ShellExecuteWait($adbPath, "shell input tap " & $tapCoordsX[1] & " " & $tapCoordsY[1], @WorkingDir, "", @SW_HIDE) ;pokaz Skrzynke
 			_AuThread_SendMessage(_AuThread_MainThread(), "Pokaz Skrzynke")
 			Sleep(Random(3000, 6000, 1))
-			ShellExecuteWait($adbPath, "shell input tap 200 200", @WorkingDir, "", @SW_HIDE) ;Skrzynka i otwarcie
+			ShellExecuteWait($adbPath, "shell input tap " & $tapCoordsX[2] & " " & $tapCoordsY[2], @WorkingDir, "", @SW_HIDE) ;Skrzynka i otwarcie
 			_AuThread_SendMessage(_AuThread_MainThread(), "Skrzynka i otwarcie")
 			Sleep(Random(3000, 6000, 1))
-			ShellExecuteWait($adbPath, "shell input tap 720 784", @WorkingDir, "", @SW_HIDE) ;ok chcę materiały
+			ShellExecuteWait($adbPath, "shell input tap " & $tapCoordsX[3] & " " & $tapCoordsY[3], @WorkingDir, "", @SW_HIDE) ;ok chcę materiały
 			_AuThread_SendMessage(_AuThread_MainThread(), "Ok chce Materialy")
 			Sleep(Random(3000, 6000, 1))
-			ShellExecuteWait($adbPath, "shell input tap 722 816", @WorkingDir, "", @SW_HIDE) ;Ok w Esencje
+			ShellExecuteWait($adbPath, "shell input tap " & $tapCoordsX[4] & " " & $tapCoordsY[4], @WorkingDir, "", @SW_HIDE) ;Ok w Esencje
 			_AuThread_SendMessage(_AuThread_MainThread(), "Ok w Esencje")
 			Sleep(Random(3000, 6000, 1))
 
 			If $SellRune == $GUI_UNCHECKED Then
-				ShellExecuteWait($adbPath, "shell input tap 757 686", @WorkingDir, "", @SW_HIDE) ;Get rune
+				ShellExecuteWait($adbPath, "shell input tap " & $tapCoordsX[5] & " " & $tapCoordsY[5], @WorkingDir, "", @SW_HIDE) ;Get rune
 				_AuThread_SendMessage(_AuThread_MainThread(), "Get Rune")
 				Sleep(Random(3000, 6000, 1))
 			Else
-				ShellExecuteWait($adbPath, "shell input tap 690 690", @WorkingDir, "", @SW_HIDE) ;Sell Rune
+				ShellExecuteWait($adbPath, "shell input tap " & $tapCoordsX[6] & " " & $tapCoordsY[6], @WorkingDir, "", @SW_HIDE) ;Sell Rune
 				_AuThread_SendMessage(_AuThread_MainThread(), "Sell Rune")
 				Sleep(Random(3000, 6000, 1))
-				ShellExecuteWait($adbPath, "shell input tap 676 575", @WorkingDir, "", @SW_HIDE) ;YES Sell Rune
+				ShellExecuteWait($adbPath, "shell input tap " & $tapCoordsX[7] & " " & $tapCoordsY[7], @WorkingDir, "", @SW_HIDE) ;YES Sell Rune
 				_AuThread_SendMessage(_AuThread_MainThread(), "Yes Sell RUNE!")
 				Sleep(Random(3000, 6000, 1))
 			EndIf
 
-			ShellExecuteWait($adbPath, "shell input tap 444 483", @WorkingDir, "", @SW_HIDE) ;Replay
+			ShellExecuteWait($adbPath, "shell input tap " & $tapCoordsX[8] & " " & $tapCoordsY[8], @WorkingDir, "", @SW_HIDE) ;Replay
 			_AuThread_SendMessage(_AuThread_MainThread(), "Replay")
 			Sleep(Random(3000, 6000, 1))
-			ShellExecuteWait($adbPath, "shell input tap 1331 604", @WorkingDir, "", @SW_HIDE) ;Start Battle
+			ShellExecuteWait($adbPath, "shell input tap " & $tapCoordsX[9] & " " & $tapCoordsY[9], @WorkingDir, "", @SW_HIDE) ;Start Battle
 			_AuThread_SendMessage(_AuThread_MainThread(), "Start Battle")
 			Sleep(Random(3000, 6000, 1))
 			$last_Event = _NowTime()

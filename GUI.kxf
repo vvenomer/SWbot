@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <object type="TAForm" name="Form1">
 	<properties>
-		<property name="Left" vt="Int16">192</property>
-		<property name="Top" vt="Int8">124</property>
-		<property name="Width" vt="Int16">683</property>
+		<property name="Left" vt="Int16">186</property>
+		<property name="Top" vt="Int8">120</property>
+		<property name="Width" vt="Int16">689</property>
 		<property name="Height" vt="Int16">477</property>
 		<property name="Caption" vt="String">Summoners Tablet Farm</property>
 		<property name="Color" vt="Ident">clBtnFace</property>
@@ -137,8 +137,8 @@
 			<properties>
 				<property name="Left" vt="Int16">496</property>
 				<property name="Top" vt="Int8">8</property>
-				<property name="Width" vt="Int8">75</property>
-				<property name="Height" vt="Int8">25</property>
+				<property name="Width" vt="Int16">171</property>
+				<property name="Height" vt="Int8">33</property>
 				<property name="Caption" vt="String">Toggle</property>
 				<property name="TabOrder" vt="Int8">7</property>
 				<property name="OnClick" vt="String">ToggleBoTClick</property>
@@ -152,7 +152,7 @@
 		<object type="TAButton" name="ConnectButton">
 			<properties>
 				<property name="Left" vt="Int16">496</property>
-				<property name="Top" vt="Int16">128</property>
+				<property name="Top" vt="Int16">176</property>
 				<property name="Width" vt="Int8">99</property>
 				<property name="Height" vt="Int8">25</property>
 				<property name="Caption" vt="String">Connect To Adb</property>
@@ -167,9 +167,9 @@
 		</object>
 		<object type="TAButton" name="ResetTimerButton">
 			<properties>
-				<property name="Left" vt="Int16">576</property>
-				<property name="Top" vt="Int8">8</property>
-				<property name="Width" vt="Int8">75</property>
+				<property name="Left" vt="Int16">544</property>
+				<property name="Top" vt="Int8">48</property>
+				<property name="Width" vt="Int8">83</property>
 				<property name="Height" vt="Int8">25</property>
 				<property name="Caption" vt="String">Reset Timer</property>
 				<property name="TabOrder" vt="Int8">9</property>
@@ -184,8 +184,8 @@
 		<object type="TAButton" name="ForceEventButton">
 			<properties>
 				<property name="Left" vt="Int16">496</property>
-				<property name="Top" vt="Int8">40</property>
-				<property name="Width" vt="Int8">75</property>
+				<property name="Top" vt="Int8">80</property>
+				<property name="Width" vt="Int8">83</property>
 				<property name="Height" vt="Int8">25</property>
 				<property name="Caption" vt="String">Force Event</property>
 				<property name="TabOrder" vt="Int8">10</property>
@@ -200,7 +200,7 @@
 		<object type="TAButton" name="ResetAdbServerButton">
 			<properties>
 				<property name="Left" vt="Int16">496</property>
-				<property name="Top" vt="Int16">160</property>
+				<property name="Top" vt="Int16">208</property>
 				<property name="Width" vt="Int8">99</property>
 				<property name="Height" vt="Int8">25</property>
 				<property name="Caption" vt="String">Reset ADB server</property>
@@ -215,9 +215,9 @@
 		</object>
 		<object type="TAButton" name="GimmeShellButton">
 			<properties>
-				<property name="Left" vt="Int16">576</property>
-				<property name="Top" vt="Int8">40</property>
-				<property name="Width" vt="Int8">75</property>
+				<property name="Left" vt="Int16">584</property>
+				<property name="Top" vt="Int8">80</property>
+				<property name="Width" vt="Int8">83</property>
 				<property name="Height" vt="Int8">25</property>
 				<property name="Caption" vt="String">Gimme Shell</property>
 				<property name="TabOrder" vt="Int8">12</property>
@@ -232,7 +232,7 @@
 		<object type="TAIPAddress" name="IPAddress1">
 			<properties>
 				<property name="Left" vt="Int16">496</property>
-				<property name="Top" vt="Int8">104</property>
+				<property name="Top" vt="Int16">152</property>
 				<property name="Width" vt="Int16">130</property>
 				<property name="Height" vt="Int8">21</property>
 				<property name="Ctl3D" vt="True">True</property>
@@ -396,8 +396,8 @@
 		<object type="TACombo" name="AdbVersionCombo">
 			<properties>
 				<property name="Left" vt="Int16">496</property>
-				<property name="Top" vt="Int16">192</property>
-				<property name="Width" vt="Int16">145</property>
+				<property name="Top" vt="Int16">240</property>
+				<property name="Width" vt="Int16">169</property>
 				<property name="Height" vt="Int8">25</property>
 				<property name="ItemHeight" vt="Int8">13</property>
 				<property name="TabOrder" vt="Int8">24</property>
@@ -512,8 +512,8 @@
 		<object type="TAButton" name="energyEventResetUsedEnergy">
 			<properties>
 				<property name="Left" vt="Int16">496</property>
-				<property name="Top" vt="Int8">72</property>
-				<property name="Width" vt="Int16">155</property>
+				<property name="Top" vt="Int8">112</property>
+				<property name="Width" vt="Int16">171</property>
 				<property name="Height" vt="Int8">25</property>
 				<property name="Caption" vt="String">Reset Used Energy</property>
 				<property name="TabOrder" vt="Int8">31</property>
@@ -527,7 +527,7 @@
 		<object type="TAInput" name="TimeConvertCestInput">
 			<properties>
 				<property name="Left" vt="Int16">496</property>
-				<property name="Top" vt="Int16">352</property>
+				<property name="Top" vt="Int16">400</property>
 				<property name="Width" vt="Int8">121</property>
 				<property name="Height" vt="Int8">21</property>
 				<property name="TabOrder" vt="Int8">32</property>
@@ -542,7 +542,7 @@
 		<object type="TALabel" name="">
 			<properties>
 				<property name="Left" vt="Int16">496</property>
-				<property name="Top" vt="Int16">240</property>
+				<property name="Top" vt="Int16">288</property>
 				<property name="Width" vt="Int16">152</property>
 				<property name="Height" vt="Int8">17</property>
 				<property name="Caption" vt="String">Time Converter DD:HH:MM:SS</property>
@@ -557,7 +557,7 @@
 		<object type="TALabel" name="Label9">
 			<properties>
 				<property name="Left" vt="Int16">496</property>
-				<property name="Top" vt="Int16">328</property>
+				<property name="Top" vt="Int16">384</property>
 				<property name="Width" vt="Int8">25</property>
 				<property name="Height" vt="Int8">17</property>
 				<property name="Caption" vt="String">Cest</property>
@@ -572,7 +572,7 @@
 		<object type="TALabel" name="Label10">
 			<properties>
 				<property name="Left" vt="Int16">496</property>
-				<property name="Top" vt="Int16">272</property>
+				<property name="Top" vt="Int16">328</property>
 				<property name="Width" vt="Int8">20</property>
 				<property name="Height" vt="Int8">17</property>
 				<property name="Caption" vt="String">Pdt</property>
@@ -587,7 +587,7 @@
 		<object type="TAInput" name="TimeConvertPdtInput">
 			<properties>
 				<property name="Left" vt="Int16">496</property>
-				<property name="Top" vt="Int16">296</property>
+				<property name="Top" vt="Int16">344</property>
 				<property name="Width" vt="Int8">121</property>
 				<property name="Height" vt="Int8">21</property>
 				<property name="TabOrder" vt="Int8">36</property>
