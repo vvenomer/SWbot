@@ -433,7 +433,7 @@
 		<object type="TACheckbox" name="EnergyEventCheckbox">
 			<properties>
 				<property name="Left" vt="Int16">160</property>
-				<property name="Top" vt="Int16">264</property>
+				<property name="Top" vt="Int16">248</property>
 				<property name="Width" vt="Int8">113</property>
 				<property name="Height" vt="Int8">17</property>
 				<property name="Caption" vt="String">Use Energy Event</property>
@@ -447,7 +447,7 @@
 		<object type="TALabel" name="EnergyUsageLabel">
 			<properties>
 				<property name="Left" vt="Int16">160</property>
-				<property name="Top" vt="Int16">288</property>
+				<property name="Top" vt="Int16">272</property>
 				<property name="Width" vt="Int8">75</property>
 				<property name="Height" vt="Int8">17</property>
 				<property name="Caption" vt="String">Energy To Use</property>
@@ -462,7 +462,7 @@
 		<object type="TAInput" name="energyEventEnergyUsageInput">
 			<properties>
 				<property name="Left" vt="Int16">160</property>
-				<property name="Top" vt="Int16">312</property>
+				<property name="Top" vt="Int16">296</property>
 				<property name="Width" vt="Int8">121</property>
 				<property name="Height" vt="Int8">21</property>
 				<property name="TabOrder" vt="Int8">28</property>
@@ -476,7 +476,7 @@
 		<object type="TALabel" name="Label8">
 			<properties>
 				<property name="Left" vt="Int16">160</property>
-				<property name="Top" vt="Int16">344</property>
+				<property name="Top" vt="Int16">328</property>
 				<property name="Width" vt="Int8">86</property>
 				<property name="Height" vt="Int8">17</property>
 				<property name="Caption" vt="String">What to do later?</property>
@@ -491,7 +491,7 @@
 		<object type="TACombo" name="EnergyEventNextActionCombo">
 			<properties>
 				<property name="Left" vt="Int16">160</property>
-				<property name="Top" vt="Int16">368</property>
+				<property name="Top" vt="Int16">352</property>
 				<property name="Width" vt="Int16">169</property>
 				<property name="Height" vt="Int8">25</property>
 				<property name="ItemHeight" vt="Int8">13</property>
@@ -601,9 +601,9 @@
 		</object>
 		<object type="TACombo" name="CfgSelectionBox">
 			<properties>
-				<property name="Left" vt="Int16">344</property>
-				<property name="Top" vt="Int16">368</property>
-				<property name="Width" vt="Int16">137</property>
+				<property name="Left" vt="Int16">160</property>
+				<property name="Top" vt="Int16">408</property>
+				<property name="Width" vt="Int16">321</property>
 				<property name="Height" vt="Int8">25</property>
 				<property name="ItemHeight" vt="Int8">13</property>
 				<property name="TabOrder" vt="Int8">37</property>
@@ -612,6 +612,21 @@
 				<property name="CtrlStyle" vt="Int32">1342374466</property>
 				<property name="CtrlExStyle" vt="Int8">0</property>
 				<property name="Resizing" vt="Set">DockHeight</property>
+			</properties>
+			<components/>
+		</object>
+		<object type="TALabel" name="Label11">
+			<properties>
+				<property name="Left" vt="Int16">160</property>
+				<property name="Top" vt="Int16">384</property>
+				<property name="Width" vt="Int8">66</property>
+				<property name="Height" vt="Int8">17</property>
+				<property name="Caption" vt="String">Select Profile</property>
+				<property name="TabOrder" vt="Int8">38</property>
+				<property name="HaveVariable" vt="False">False</property>
+				<property name="CtrlStyle" vt="Int32">1342308608</property>
+				<property name="CtrlExStyle" vt="Int8">0</property>
+				<property name="Resizing" vt="Set"/>
 			</properties>
 			<components/>
 		</object>

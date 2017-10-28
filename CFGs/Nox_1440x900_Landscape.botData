@@ -4,8 +4,8 @@ version=31
 
 [Timer]
 hrs=0  
-mins=3
-secs=0
+mins=1
+secs=45
 
 [Rune]
 SellRune=4
@@ -14,11 +14,11 @@ SellRune=4
 secs=51
 mins=3
 use=1
-perLevel=6
-useEnergyTimer=4
+perLevel=5
+useEnergyTimer=1
 
 [EnergyEvent]
-useEvent=1
+useEvent=4
 limit=50
 next=Continue using Energy Timer
 
