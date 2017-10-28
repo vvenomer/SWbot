@@ -280,7 +280,7 @@ While True
 	GUICtrlSetData($TimeZoneInfo, $TimeZoneString)
 
 
-	Sleep(60)
+	Sleep(50)
 WEnd
 
 Func CESTtoPDT($time)
