@@ -1,3 +1,19 @@
+CONTENTS OF ADBS FOLDER HAVE TO BE SUPPLIED BY THE USER. 
+THE CONTENTS HAVE TO BE IN THE FOLLOWING FORM:
+ADBS/ADB_VERSION_NAME_NO_SPACES/
+
+ADBS
+├───31
+│       adb.exe
+│       AdbWinApi.dll
+│       AdbWinUsbApi.dll
+│
+└───39
+        adb.exe
+        AdbWinApi.dll
+        AdbWinUsbApi.dll
+				
+				
 1.Basic Timer
 	hours,minutes,seconds:
 		Set the first timer. tapping wil begin after 5.Timer equals or surpasses the value.
