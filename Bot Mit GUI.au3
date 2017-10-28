@@ -1,5 +1,7 @@
 #include <Date.au3>
 #include <Array.au3>
+#include <File.au3>
+#include <FileConstants.au3>
 
 #include <ButtonConstants.au3>
 #include <ComboConstants.au3>
@@ -22,8 +24,8 @@ $InputSecs = GUICtrlCreateInput("InputSecs", 8, 144, 145, 21)
 $DebugInfo = GUICtrlCreateLabel("DebugInfo", 320, 8, 166, 345)
 $ToggleBotButton = GUICtrlCreateButton("Toggle", 496, 8, 171, 33)
 $ConnectButton = GUICtrlCreateButton("Connect To Adb", 496, 176, 99, 25)
-$ResetTimerButton = GUICtrlCreateButton("Reset Timer", 544, 48, 83, 25)
-$ForceEventButton = GUICtrlCreateButton("Force Event", 496, 80, 83, 25)
+$ResetTimerButton = GUICtrlCreateButton("Reset Timer", 496, 80, 83, 25)
+$ForceEventButton = GUICtrlCreateButton("Force Event", 496, 48, 171, 25)
 $ResetAdbServerButton = GUICtrlCreateButton("Reset ADB server", 496, 208, 99, 25)
 $GimmeShellButton = GUICtrlCreateButton("Gimme Shell", 584, 80, 83, 25)
 $IPAddress1 = _GUICtrlIpAddress_Create($Form1, 496, 152, 130, 21)
@@ -60,7 +62,7 @@ GUISetState(@SW_SHOW)
 ;HotKeySet("{F4}","KillMe")
 
 $workerThread = _AuThread_StartThread("WorkerThread")
-
+$adbSPath=@WorkingDir&"\ADBS\"
 
 
 
@@ -90,7 +92,8 @@ GUICtrlSetData($InputSecs, $mainSecs)
 
 _GUICtrlIpAddress_Set($IPAddress1, $mainIp)
 
-$ADBVersionsList = "39|31"
+
+$ADBVersionsList=_ArrayToString(_FileListToArray($adbSPath,"*",$FLTA_FOLDERS),"|",1)
 $arrayADBVersionsList = StringSplit($ADBVersionsList, "|")
 $ADBVersionIndex = _ArraySearch($arrayADBVersionsList, $adbVersion)
 GUICtrlSetData($AdbVersionCombo, "|" & $ADBVersionsList, $arrayADBVersionsList[$ADBVersionIndex])
@@ -146,7 +149,7 @@ While True
 			_AuThread_SendMessage($workerThread, "ResetADBMsg")
 
 		Case $GimmeShellButton
-			Run("cmd", "C:\Users\oem\SkyDrive\Programy\AutoItV3\summoners\ADBS\" & $adbVersion, @SW_SHOW)
+			Run("cmd", $adbSPath & $adbVersion, @SW_SHOW)
 
 		Case $UpdateCfgButton
 			;najlpierw zapisz do ini

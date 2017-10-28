@@ -167,8 +167,8 @@
 		</object>
 		<object type="TAButton" name="ResetTimerButton">
 			<properties>
-				<property name="Left" vt="Int16">544</property>
-				<property name="Top" vt="Int8">48</property>
+				<property name="Left" vt="Int16">496</property>
+				<property name="Top" vt="Int8">80</property>
 				<property name="Width" vt="Int8">83</property>
 				<property name="Height" vt="Int8">25</property>
 				<property name="Caption" vt="String">Reset Timer</property>
@@ -184,8 +184,8 @@
 		<object type="TAButton" name="ForceEventButton">
 			<properties>
 				<property name="Left" vt="Int16">496</property>
-				<property name="Top" vt="Int8">80</property>
-				<property name="Width" vt="Int8">83</property>
+				<property name="Top" vt="Int8">48</property>
+				<property name="Width" vt="Int16">171</property>
 				<property name="Height" vt="Int8">25</property>
 				<property name="Caption" vt="String">Force Event</property>
 				<property name="TabOrder" vt="Int8">10</property>
