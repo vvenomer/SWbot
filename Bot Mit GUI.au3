@@ -105,6 +105,13 @@ _GUICtrlIpAddress_Set($IPAddress1, $mainIp)
 $ADBVersionsList = _ArrayToString(_FileListToArray($adbSPath, "*", $FLTA_FOLDERS), "|", 1)
 $arrayADBVersionsList = StringSplit($ADBVersionsList, "|")
 $ADBVersionIndex = _ArraySearch($arrayADBVersionsList, $adbVersion)
+If @error Then
+	;MsgBox features: Title=Yes, Text=Yes, Buttons=OK, Icon=Critical
+	MsgBox(16,"ADB Not Found","Adb Client not found. Consult README top section for more info.")
+EndIf
+
+
+
 GUICtrlSetData($AdbVersionCombo, "|" & $ADBVersionsList, $arrayADBVersionsList[$ADBVersionIndex])
 
 GUICtrlSetState($SellRuneCheck, $SellRune)
@@ -423,6 +430,7 @@ Func WorkerThread()
 				$tapCoordsY[7] = IniRead($cfgPath & $lastCfg, "TapCoords", "sellRune2y", 0)
 				$tapCoordsY[8] = IniRead($cfgPath & $lastCfg, "TapCoords", "replayy", 0)
 				$tapCoordsY[9] = IniRead($cfgPath & $lastCfg, "TapCoords", "startBattley", 0)
+
 			Case "KillMeMsg"
 				IniWrite($cfgPath & $lastCfg, "ADB", "ip", $ip)
 				IniWrite($cfgPath & $lastCfg, "Timer", "hrs", $hrs)
