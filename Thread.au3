@@ -74,7 +74,7 @@ Func WorkerThread()
 				;ShellExecuteWait($adbPath,"tcpip 5555",@WorkingDir,"",@SW_SHOW)
 
 			Case "UpdateMsg"
-				$lastCfg = IniRead(@WorkingDir & "\lastCfg.botData", "profile", "a", "Default.BotData")
+				$lastCfg = IniRead(@WorkingDir & "\lastCfg.last", "profile", "a", "Default.BotData")
 				$hrs = IniRead($cfgPath & $lastCfg, "Timer", "hrs", 0)
 				$mins = IniRead($cfgPath & $lastCfg, "Timer", "mins", 0)
 				$secs = IniRead($cfgPath & $lastCfg, "Timer", "secs", 0)
