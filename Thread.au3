@@ -272,6 +272,4 @@ Func Toggle($i)
 	EndIf
 EndFunc   ;==>Toggle
 
-
-
 #EndRegion TU JEST W¥TKEK WORKER BOTA

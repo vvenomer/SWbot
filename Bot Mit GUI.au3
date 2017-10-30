@@ -66,7 +66,19 @@ $workerThread = _AuThread_StartThread("WorkerThread")
 $adbSPath = @WorkingDir & "\ADBS\"
 $cfgPath = @WorkingDir & "\CFGs\"
 
-$lastCfg = IniRead(@WorkingDir & "\lastCfg.botData", "profile", "a", "Default.BotData")
+If FileExists(@WorkingDir & "\lastCfg.last") Then
+	$lastCfg = IniRead(@WorkingDir & "\lastCfg.last", "profile", "a", "Default.BotData")
+EndIf
+If FileExists($cfgPath & $lastCfg) Then
+
+ElseIf FileExists($cfgPath & "Default.botData") Then
+	$lastCfg = "Default.botData"
+Else
+	$aTemp=_FileListToArray($adbSPath, "*", $FLTA_FOLDERS)
+	_CreateDefaultConfig("Default.botData",$aTemp[1])
+	$lastCfg="Default.botData"
+EndIf
+
 
 $CFGsList = _ArrayToString(_FileListToArray($cfgPath, "*.botData", $FLTA_FILES), "|", 1)
 $arrayCFGsList = StringSplit($CFGsList, "|")
@@ -211,7 +223,7 @@ While True
 			GUICtrlSetData($TimeConvertCestInput, StringFormat("%02d", $TimeConvertPdtDate[3]) & ":" & StringFormat("%02d", $TimeConvertPdtTime[1]) & ":" & StringFormat("%02d", $TimeConvertPdtTime[2]) & ":" & StringFormat("%02d", $TimeConvertPdtTime[3]))
 		Case $CfgSelectionBox
 			$lastCfg = GUICtrlRead($CfgSelectionBox)
-			IniWrite(@WorkingDir & "\lastCfg.botData", "profile", "a", $lastCfg)
+			IniWrite(@WorkingDir & "\lastCfg.last", "profile", "a", $lastCfg)
 			;Get config
 			$mainHrs = IniRead($cfgPath & $lastCfg, "Timer", "hrs", 0)
 			$mainMins = IniRead($cfgPath & $lastCfg, "Timer", "mins", 0)
@@ -302,3 +314,44 @@ Func KillMe()
 	Sleep(200)
 	Exit
 EndFunc   ;==>KillMe
+
+Func _CreateDefaultConfig($name,$adbVersion)
+	IniWrite($cfgPath & $name, "ADB", "ip", "192.168.0.1")
+	IniWrite($cfgPath & $name, "Timer", "hrs", 0)
+	IniWrite($cfgPath & $name, "Timer", "mins", 2)
+	IniWrite($cfgPath & $name, "Timer", "secs", 0)
+	IniWrite($cfgPath & $name, "Rune", "SellRune", $GUI_UNCHECKED)
+	IniWrite($cfgPath & $name, "Energy", "secs", 0)
+	IniWrite($cfgPath & $name, "Energy", "mins", 5)
+	IniWrite($cfgPath & $name, "Energy", "useEnergyTimer", $GUI_CHECKED)
+	IniWrite($cfgPath & $name, "Energy", "perLevel", 3)
+	IniWrite($cfgPath & $name, "ADB", "version", $adbVersion)
+	IniWrite($cfgPath & $name, "EnergyEvent", "useEvent", $GUI_UNCHECKED)
+	IniWrite($cfgPath & $name, "EnergyEvent", "limit", 0)
+	IniWrite($cfgPath & $name, "EnergyEvent", "next", "Continue using Energy Timer")
+
+	IniWrite($cfgPath & $name, "TapCoords", "reveivex", 1000)
+	IniWrite($cfgPath & $name, "TapCoords", "skrzynka1x", 200)
+	IniWrite($cfgPath & $name, "TapCoords", "skrzynka2x", 200)
+	IniWrite($cfgPath & $name, "TapCoords", "getMaterialsx", 720)
+	IniWrite($cfgPath & $name, "TapCoords", "getEssencesx", 722)
+	IniWrite($cfgPath & $name, "TapCoords", "getRunex", 757)
+	IniWrite($cfgPath & $name, "TapCoords", "sellRune1x", 690)
+	IniWrite($cfgPath & $name, "TapCoords", "sellRune2x", 676)
+	IniWrite($cfgPath & $name, "TapCoords", "replayx", 444)
+	IniWrite($cfgPath & $name, "TapCoords", "startBattlex", 1331)
+
+	IniWrite($cfgPath & $name, "TapCoords", "reveivey", 600)
+	IniWrite($cfgPath & $name, "TapCoords", "skrzynka1y", 200)
+	IniWrite($cfgPath & $name, "TapCoords", "skrzynka2y", 200)
+	IniWrite($cfgPath & $name, "TapCoords", "getMaterialsy", 720)
+	IniWrite($cfgPath & $name, "TapCoords", "getEssencesy", 816)
+	IniWrite($cfgPath & $name, "TapCoords", "getRuney", 686)
+	IniWrite($cfgPath & $name, "TapCoords", "sellRune1y", 690)
+	IniWrite($cfgPath & $name, "TapCoords", "sellRune2y", 575)
+	IniWrite($cfgPath & $name, "TapCoords", "replayy", 483)
+	IniWrite($cfgPath & $name, "TapCoords", "startBattley", 604)
+
+
+EndFunc
+
