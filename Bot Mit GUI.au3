@@ -300,7 +300,7 @@ EndFunc   ;==>PDTtoCEST
 
 
 
-#Region TU JEST WÄ„TKEK WORKER BOTA
+#Region TU JEST WĄTKEK WORKER BOTA
 Func WorkerThread()
 	Local $adbPath = "" ;
 	Local $ToggleBot = 0
@@ -366,7 +366,7 @@ Func WorkerThread()
 
 			Case "ResetADBMsg"
 
-				;odpal adb jak nie dziaĹ‚a. inaczej zawiesi przy zmianie portu
+				;odpal adb jak nie działa. inaczej zawiesi przy zmianie portu
 
 
 				ShellExecuteWait($adbPath, "kill-server", @WorkingDir, "", @SW_SHOW)
@@ -504,7 +504,7 @@ Func WorkerThread()
 		;		$statusInfo=$statusInfo&
 		_AuThread_SendMessage(_AuThread_MainThread(), $statusInfo)
 
-		;obsĹ‚uga energyeventa; i zmiana w configu
+		;obsługa energyeventa; i zmiana w configu
 
 		If $energyEventEnergyLimitBot <= $energyEventEnergyLimitCurrent And $energyEventChecked==$GUI_CHECKED Then
 			If $energyEventNextActionBot == "Continue using Energy Timer" Then
@@ -523,17 +523,23 @@ Func WorkerThread()
 		$miliseconds = Int(TimerDiff($beginDate))
 		If $milisToWait < $miliseconds And $ToggleBot == 1 Then
 			;ShellExecuteWait($adbPath,"connect "&$ip,@WorkingDir,"",@SW_HIDE)
+			;Sleep(20)
 
 			ShellExecuteWait($adbPath, "shell input tap " & $tapCoordsX[0] & " " & $tapCoordsY[0], @WorkingDir, "", @SW_HIDE) ;Nie w reveive
 			_AuThread_SendMessage(_AuThread_MainThread(), "Nie w Reveive")
 			Sleep(Random(3000, 6000, 1))
+			;ShellExecuteWait($adbPath, "shell input tap " & $tapCoordsX[1] & " " & $tapCoordsY[1], @WorkingDir, "", @SW_HIDE) ;pokaz Skrzynke
+			;_AuThread_SendMessage(_AuThread_MainThread(), "Pokaz Skrzynke")
+			;Sleep(Random(3000, 6000, 1))
 			ShellExecuteWait($adbPath, "shell input tap " & $tapCoordsX[2] & " " & $tapCoordsY[2], @WorkingDir, "", @SW_HIDE) ;Skrzynka i otwarcie
 			_AuThread_SendMessage(_AuThread_MainThread(), "Skrzynka i otwarcie")
 			Sleep(Random(3000, 6000, 1))
-			ShellExecuteWait($adbPath, "shell input tap " & $tapCoordsX[3] & " " & $tapCoordsY[3], @WorkingDir, "", @SW_HIDE) ;ok chcÄ™ materiaĹ‚y
+			ShellExecuteWait($adbPath, "shell input tap " & $tapCoordsX[3] & " " & $tapCoordsY[3], @WorkingDir, "", @SW_HIDE) ;ok chcę materiały
 			_AuThread_SendMessage(_AuThread_MainThread(), "Ok chce Materialy")
+			;Sleep(Random(3000, 6000, 1))
 			ShellExecuteWait($adbPath, "shell input tap " & $tapCoordsX[4] & " " & $tapCoordsY[4], @WorkingDir, "", @SW_HIDE) ;Ok w Esencje
 			_AuThread_SendMessage(_AuThread_MainThread(), "Ok w Esencje")
+			;Sleep(Random(3000, 6000, 1))
 
 			If $SellRune == $GUI_UNCHECKED Then
 				ShellExecuteWait($adbPath, "shell input tap " & $tapCoordsX[5] & " " & $tapCoordsY[5], @WorkingDir, "", @SW_HIDE) ;Get rune
@@ -551,6 +557,7 @@ Func WorkerThread()
 			Sleep(Random(3000, 6000, 1))
 			ShellExecuteWait($adbPath, "shell input tap " & $tapCoordsX[9] & " " & $tapCoordsY[9], @WorkingDir, "", @SW_HIDE) ;Start Battle
 			_AuThread_SendMessage(_AuThread_MainThread(), "Start Battle")
+			;Sleep(Random(3000, 6000, 1))
 			$last_Event = _NowTime()
 			$totalEvents += 1
 			$beginDate = TimerInit()
@@ -574,4 +581,4 @@ Func KillMe()
 	Exit
 EndFunc   ;==>KillMe
 
-#EndRegion TU JEST WÄ„TKEK WORKER BOTA
+#EndRegion TU JEST WĄTKEK WORKER BOTA
